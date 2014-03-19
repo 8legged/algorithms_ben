@@ -1,0 +1,81 @@
+module.exports = function LinkedList() {
+// points to nothing because list is empty and just needs to exist
+    this.head = null;
+  // start/default size
+    this.size = 0;
+
+//  push(element) – insert element at head of list
+LinkedList.prototype.push = function(element) {
+  // temp head as placeholder
+    var temp = this.head;
+    // create a new head object
+    this.head = new Node(element);
+    // give head an address, which is temp
+    this.head.next = temp;
+    this.size++;
+};
+//  pop(pos) – remove element at position pos, zero indexed
+LinkedList.prototype.pop = function(pos) {
+    var currentNode = this.head;
+  // see if number provided is larger than the list
+    if(pos > this.size - 1) {
+        alert('fail: position is greater than the list size');
+    // see if number provided is the head
+    } else if(pos === 0) {
+        this.head = this.head.next;
+        currentNode = null;
+        this.size--;
+      // number provided is valid and somewhere in the list
+    } else {
+        for(var i = 0; i < this.size; i++) {
+        // loop to determine currentNode.next, which reveals position
+            if(i === pos - 1) {
+                var nextNode = currentNode.next;
+                currentNode.next = nextNode.next;
+                nextNode.next = null;
+                // shrink the list size
+                this.size--;
+            } else {
+                currentNode = currentNode.next;
+            }
+        }
+    }
+};
+//  isElement(element)  – return true if element occurs in the list, else false.
+LinkedList.prototype.isElement = function(element) {
+    var currentNode = this.head;
+    for(var i = 0; i < this.size; i++) {
+        if(currentNode === element) {
+            return true;
+        } else {
+            currentNode = currentNode.next;
+        }
+    }
+    return false;
+};
+//  size() – return number of elements in list
+LinkedList.prototype.lsize = function() {
+    return this.size;
+};
+
+//  empty() – return true if empty, false, otherwise.
+LinkedList.prototype.empty = function() {
+    if(this.size === 0){
+        return true;
+    } else {
+        return false;
+    }
+};
+function Node(el){
+// every element has a value
+    this.value = el;
+// since this is a new object, next is null by default
+    this.next = null;
+  }
+};
+// create a new LinkedList
+// var list = new LinkedList();
+// add some values
+// list.push(4);
+
+// console.log(list);
