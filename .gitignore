@@ -1,0 +1,11 @@
+.DS_Store
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+npm-debug.log
+node_modules/
+test/acceptance/*-results.xml
